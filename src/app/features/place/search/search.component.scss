@@ -1,0 +1,19 @@
+.search-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+
+  app-input {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    app-button {
+      width: 100%;
+    }
+  }
+}

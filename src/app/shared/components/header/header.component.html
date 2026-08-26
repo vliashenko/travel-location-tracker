@@ -1,0 +1,14 @@
+<header class="navbar">
+    <div class="logo" (click)="logoClick.emit()">
+        <mat-icon color="primary">favorite</mat-icon>
+        <span>WISH</span>
+    </div>
+
+    <button mat-button class="wishlist-btn" (click)="openWishlist.emit()">
+        <mat-icon color="warn" [matBadge]="wishlistCount" [matBadgeHidden]="wishlistCount === 0" matBadgeColor="warn"
+            aria-hidden="false">
+            favorite
+        </mat-icon>
+        <span>Мій Wishlist</span>
+    </button>
+</header>

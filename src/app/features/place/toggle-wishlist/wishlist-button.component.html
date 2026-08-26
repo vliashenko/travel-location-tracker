@@ -1,0 +1,4 @@
+<app-button [variant]="isSaved() ? 'warn' : 'secondary'" [icon]="isSaved() ? 'favorite' : 'favorite_border'"
+    (btnClick)="toggle($event)">
+    {{ isSaved() ? 'Збережено в Wishlist' : 'Додати в Wishlist' }}
+</app-button>

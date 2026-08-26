@@ -1,0 +1,38 @@
+:host {
+  display: inline-block;
+
+  &.full-width {
+    display: block;
+    width: 100%;
+
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  white-space: nowrap;
+
+  mat-icon {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  :host(.mobile-full-width) {
+    display: block;
+    width: 100%;
+
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

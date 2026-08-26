@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "new-app": {
+    "travel-location-tracker": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -59,12 +59,15 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "new-app:build:production"
+              "buildTarget": "travel-location-tracker:build:production"
             },
             "development": {
-              "buildTarget": "new-app:build:development"
+              "buildTarget": "travel-location-tracker:build:development"
             }
           },
           "defaultConfiguration": "development"

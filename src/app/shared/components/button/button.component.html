@@ -1,0 +1,5 @@
+<button mat-raised-button [color]="variant === 'warn' ? 'warn' : variant === 'secondary' ? 'accent' : 'primary'"
+    [disabled]="disabled" (click)="btnClick.emit($event)">
+    <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+    <ng-content></ng-content>
+</button>

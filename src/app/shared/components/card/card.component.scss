@@ -1,0 +1,150 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.place-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+  padding: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  &.selected {
+    border: 2px solid #3f51b5;
+  }
+
+  .card-main-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .card-image-wrapper {
+    flex: 0 0 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f1f5f9;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: 0;
+    }
+  }
+
+  .card-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 !important;
+
+    .title {
+      margin: 0 0 0.2rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .meta-info {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 0.25rem;
+
+      .rating {
+        color: #f59e0b;
+        font-weight: 700;
+        font-size: 0.85rem;
+
+        .reviews {
+          color: #64748b;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .address {
+      margin: 0;
+      color: #64748b;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    app-chip {
+      display: inline-flex;
+      max-width: 50%;
+      flex-shrink: 1;
+    }
+
+    .wishlist-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #2563eb;
+      font-weight: 500;
+      padding: 0 0.5rem;
+      min-width: auto;
+      margin-left: auto;
+      flex-shrink: 0;
+
+      mat-icon {
+        font-size: 1.1rem;
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+
+      .btn-text {
+        white-space: nowrap;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .place-card .card-footer {
+    flex-direction: column;
+    align-items: center;
+
+    .wishlist-btn {
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

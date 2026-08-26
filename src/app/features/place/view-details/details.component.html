@@ -1,0 +1,55 @@
+<div class="details-panel" *ngIf="place; else emptyState">
+    <!-- Updated class name here -->
+    <img class="hero-image" [src]="place.imageUrl || '/placeholder.jpg'" [alt]="place.name" loading="lazy"
+        (error)="$event.target.src = '/placeholder.jpg'" />
+        
+    <div class="details-header">
+        <h2>{{ place.name }}</h2>
+        <p class="rating">★ {{ place.rating || 'N/A' }} ({{ place.reviewsCount || 0 }} відгуків)</p>
+        <p class="price" *ngIf="place.price"><strong>Ціна:</strong> {{ place.price }}</p>
+    </div>
+
+    <p class="address" *ngIf="place.address">
+        <strong>Адреса:</strong> {{ place.address }}
+    </p>
+
+    <!-- Enriched Contact Information -->
+    <div class="contact-info" *ngIf="place.phone || place.website">
+        <p *ngIf="place.phone">
+            <strong>Телефон: </strong> <a [href]="'tel:' + place.phone">{{ place.phone }}</a>
+        </p>
+        <p *ngIf="place.website">
+            <strong>Веб-сайт: </strong> <a [href]="place.website" target="_blank" rel="noopener">{{ place.website }}</a>
+        </p>
+    </div>
+
+    <div class="description" *ngIf="place.description">
+        <h3>Про місце</h3>
+        <p>{{ place.description }}</p>
+    </div>
+
+    <div class="tags" *ngIf="place.type">
+        <app-chip [label]="place.type" icon="category"></app-chip>
+    </div>
+
+    <div class="reviews-section" *ngIf="place.reviewsList && place.reviewsList.length > 0">
+        <h3>Відгуки</h3>
+        <div class="review-item" *ngFor="let review of place.reviewsList">
+            <div class="review-meta">
+                <strong>{{ review.author }}</strong>
+                <span class="review-rating">★ {{ review.rating }}</span>
+            </div>
+            <p class="review-text">{{ review.text }}</p>
+        </div>
+    </div>
+
+    <div class="actions">
+        <app-wishlist-button [place]="place"></app-wishlist-button>
+    </div>
+</div>
+
+<ng-template #emptyState>
+    <div class="empty-state">
+        <p>Оберіть місце для перегляду деталей</p>
+    </div>
+</ng-template>

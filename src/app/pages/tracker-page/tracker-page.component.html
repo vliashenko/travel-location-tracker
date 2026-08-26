@@ -1,0 +1,41 @@
+<div class="tracker-page">
+    <header class="header">
+        <h1>Пошук місць</h1>
+        <p>Знайдіть цікаві локації та додавайте їх до власного списку</p>
+    </header>
+
+    <section class="search-section">
+        <app-search-places (placesFound)="onPlacesFound($event)" (loadingChanged)="onLoadingChanged($event)">
+        </app-search-places>
+    </section>
+
+    <main class="content-grid" *ngIf="!isLoading; else loadingState">
+
+        <div class="results-list" *ngIf="places.length > 0; else noResults">
+            <app-card *ngFor="let place of places" 
+                [place]="place"
+                [state]="{ isSelected: selectedPlace?.id === place.id, isSaved: isSaved(place) }"
+                (selectCard)="selectPlace($event)"
+                (toggleWishlist)="toggleWishlist($event)">
+            </app-card>
+        </div>
+
+        <ng-template #noResults>
+            <div class="empty-results">
+                <p>Не знайдено жодного місця. Спробуйте інший запит.</p>
+            </div>
+        </ng-template>
+
+        <aside class="details-sidebar">
+            <app-place-details [place]="selectedPlace"></app-place-details>
+        </aside>
+
+    </main>
+
+    <ng-template #loadingState>
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Завантаження даних...</p>
+        </div>
+    </ng-template>
+</div>

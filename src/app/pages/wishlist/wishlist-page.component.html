@@ -1,0 +1,22 @@
+<div class="wishlist-page">
+    <div class="header">
+        <h1>Обране (Wishlist)</h1>
+        <p>Збережені локації для майбутніх відвідувань</p>
+    </div>
+
+    <main class="content-container">
+        <div class="results-list">
+            @if (savedPlaces().length > 0) {
+            @for (place of savedPlaces(); track place.id) {
+            <app-card [place]="place" [state]="{ isSelected: false, isSaved: true }"
+                (toggleWishlist)="toggleWishlist($event)">
+            </app-card>
+            }
+            } @else {
+            <div class="empty-results">
+                <p>Ваш список обраного порожній.</p>
+            </div>
+            }
+        </div>
+    </main>
+</div>
