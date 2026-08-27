@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,9 +16,9 @@ import { ButtonComponent } from '../button/button.component';
     styleUrl: './card.component.scss'
 })
 export class CardComponent {
-    @Input({ required: true }) place!: Place;
-    @Input() state: CardState = { isSelected: false, isSaved: false };
+    place = input.required<Place>() ;
+    state = input<CardState>({ isSelected: false, isSaved: false });
 
-    @Output() selectCard = new EventEmitter<Place>();
-    @Output() toggleWishlist = new EventEmitter<Place>();
+    selectCard = output<Place>();
+    toggleWishlist = output<Place>();
 }

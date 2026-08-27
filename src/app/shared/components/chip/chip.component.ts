@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,6 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
     styleUrl: './chip.component.scss'
 })
 export class ChipComponent {
-    @Input() label = '';
-    @Input() icon?: string;
+    label = input<string>('');
+    icon = input<string>('');
 }

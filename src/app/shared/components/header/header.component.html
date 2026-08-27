@@ -5,7 +5,7 @@
     </div>
 
     <button mat-button class="wishlist-btn" (click)="openWishlist.emit()">
-        <mat-icon color="warn" [matBadge]="wishlistCount" [matBadgeHidden]="wishlistCount === 0" matBadgeColor="warn"
+        <mat-icon color="warn" [matBadge]="wishlistCount()" [matBadgeHidden]="wishlistCount() === 0" matBadgeColor="warn"
             aria-hidden="false">
             favorite
         </mat-icon>

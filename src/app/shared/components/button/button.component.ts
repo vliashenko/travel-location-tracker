@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ButtonVariant } from '@entities/ui/button.type';
 
 @Component({
     selector: 'app-button',
@@ -12,9 +11,9 @@ import { ButtonVariant } from '@entities/ui/button.type';
     styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
-    @Input() variant: ButtonVariant = 'primary';
-    @Input() icon?: string;
-    @Input() disabled = false;
+    variant = input<string>('primary') ;
+    icon = input<string | undefined>();
+    disabled = input<boolean>(false);
 
     @Input()
     @HostBinding('class.full-width')
@@ -24,5 +23,5 @@ export class ButtonComponent {
     @HostBinding('class.mobile-full-width')
     responsive = false;
 
-    @Output() btnClick = new EventEmitter<MouseEvent>();
+    btnClick = output<MouseEvent>();
 }

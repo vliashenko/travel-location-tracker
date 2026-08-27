@@ -1,4 +1,4 @@
-import { Component, inject, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, inject, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from '@shared/components/input/input.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -21,16 +21,16 @@ export class SearchPlacesComponent implements OnInit {
     location = 'Paris';
     isLoading = false;
 
-    @Output() placesFound = new EventEmitter<Place[]>();
-    @Output() loadingChanged = new EventEmitter<boolean>();
+    placesFound = output<Place[]>();
+    loadingChanged = output<boolean>();
 
     ngOnInit(): void {
         this.onSearch();
     }
 
     onSearch(): void {
-        const searchQuery = (typeof this.query === 'function' ? (this.query as any)() : this.query) || 'Tourist Attractions';
-        const searchLocation = (typeof this.location === 'function' ? (this.location as any)() : this.location) || 'Paris';
+        const searchQuery = this.query || 'Tourist Attractions';
+        const searchLocation = this.location || 'Paris';
 
         this.isLoading = true;
         this.loadingChanged.emit(true);
@@ -45,7 +45,6 @@ export class SearchPlacesComponent implements OnInit {
 
         this.api.fetchPlaces(searchQuery, searchLocation).subscribe({
             next: (places) => {
-                console.log('[SearchPlacesComponent] Fresh API Response:', places);
                 if (places && places.length > 0) {
                     this.cache.set(searchQuery, searchLocation, places);
                 }
@@ -54,7 +53,6 @@ export class SearchPlacesComponent implements OnInit {
                 this.loadingChanged.emit(false);
             },
             error: (err) => {
-                console.error('[SearchPlacesComponent] API Error:', err);
                 this.isLoading = false;
                 this.loadingChanged.emit(false);
             }

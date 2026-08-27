@@ -13,6 +13,7 @@ export interface SerpApiRawResult {
     operating_hours?: { [key: string]: string };
     description?: string;
     snippet?: string;
+    photos_link?: string;
 }
 
 export interface SerpApiResponse {

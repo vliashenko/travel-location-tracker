@@ -9,22 +9,26 @@
         </app-search-places>
     </section>
 
-    <main class="content-grid" *ngIf="!isLoading; else loadingState">
+    @if (!isLoading) {
+    <main class="content-grid">
 
-        <div class="results-list" *ngIf="places.length > 0; else noResults">
-            <app-card *ngFor="let place of places" 
-                [place]="place"
-                [state]="{ isSelected: selectedPlace?.id === place.id, isSaved: isSaved(place) }"
-                (selectCard)="selectPlace($event)"
-                (toggleWishlist)="toggleWishlist($event)">
+        @if (places.length > 0){
+        <div class="results-list">
+            @for (place of places; track place.id) {
+            @if (selectedPlace?.id) {
+            <app-card [place]="place" [state]="{ isSelected: selectedPlace.id === place.id, isSaved: isSaved(place) }"
+                (selectCard)="selectPlace($event)" (toggleWishlist)="toggleWishlist($event)">
             </app-card>
+            }
+            }
         </div>
-
-        <ng-template #noResults>
+        } @else {
+        <div>
             <div class="empty-results">
                 <p>Не знайдено жодного місця. Спробуйте інший запит.</p>
             </div>
-        </ng-template>
+        </div>
+        }
 
         <aside class="details-sidebar">
             <app-place-details [place]="selectedPlace"></app-place-details>
@@ -32,10 +36,14 @@
 
     </main>
 
-    <ng-template #loadingState>
+    } @else {
+    <div>
         <div class="loading-state">
             <div class="spinner"></div>
             <p>Завантаження даних...</p>
         </div>
-    </ng-template>
+    </div>
+    }
+
+
 </div>

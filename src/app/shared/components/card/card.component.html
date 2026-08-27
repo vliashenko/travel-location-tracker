@@ -1,31 +1,36 @@
-<mat-card class="place-card" [class.selected]="state.isSelected" (click)="selectCard.emit(place)" tabindex="0"
-    role="button" [attr.aria-selected]="state.isSelected">
+<mat-card class="place-card" [class.selected]="state().isSelected" (click)="selectCard.emit(place())" tabindex="0"
+    role="button" [attr.aria-selected]="state().isSelected">
 
     <div class="card-main-content">
         <div class="card-image-wrapper">
-            <img mat-card-image [src]="place.imageUrl || '/placeholder.jpg'" [alt]="place.name" loading="lazy"
+            <img mat-card-image [src]="place().imageUrl" [alt]="place().name" loading="lazy"
                 (error)="$event.target.src = '/placeholder.jpg'" />
         </div>
 
         <mat-card-content class="card-content">
-            <h3 class="title" [title]="place.name">{{ place.name }}</h3>
+            <h3 class="title" [title]="place().name">{{ place().name }}</h3>
 
             <div class="meta-info">
-                <span class="rating">★ {{ place.rating || 'N/A' }}
-                    <span class="reviews">({{ place.reviewsCount || 0 }})</span>
+                <span class="rating">★ {{ place().rating || 'N/A' }}
+                    <span class="reviews">({{ place().reviewsCount || 0 }})</span>
                 </span>
             </div>
 
-            <p class="address" *ngIf="place.address">{{ place.address }}</p>
+            @if (place().address) {
+            <p class="address">{{ place().address }}</p>
+            }
+
         </mat-card-content>
     </div>
 
     <div class="card-footer">
-        <app-chip *ngIf="place.type" [label]="place.type"></app-chip>
+        @if (place().type) {
+        <app-chip [label]="place().type || ''"></app-chip>
+        }
 
-        <app-button [variant]="state.isSaved ? 'warn' : 'secondary'"
-            [icon]="state.isSaved ? 'favorite' : 'favorite_border'" (btnClick)="toggleWishlist.emit(place)">
-            {{ state.isSaved ? 'Збережено в Wishlist' : 'Додати в Wishlist' }}
+        <app-button [variant]="state().isSaved ? 'warn' : 'secondary'"
+            [icon]="state().isSaved ? 'favorite' : 'favorite_border'" (btnClick)="toggleWishlist.emit(place())">
+            {{ state().isSaved ? 'Збережено в Wishlist' : 'Додати в Wishlist' }}
         </app-button>
     </div>
 </mat-card>

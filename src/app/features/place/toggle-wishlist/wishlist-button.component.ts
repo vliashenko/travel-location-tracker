@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { PlaceStorageService } from '@services/place/place-storage.service.api';
@@ -14,20 +14,20 @@ import { Place } from '@entities/business/place.type';
 export class WishlistButtonComponent {
     private storage = inject(PlaceStorageService);
 
-    @Input({ required: true }) place!: Place;
+    place = input.required<Place>();
 
     isSaved(): boolean {
-        return this.storage.getWishlist().some(p => p.id === this.place.id);
+        return this.storage.getWishlist().some(p => p.id === this.place().id);
     }
 
     toggle(event?: MouseEvent): void {
         event?.stopPropagation();
         const current = this.storage.getWishlist();
-        const exists = current.some(p => p.id === this.place.id);
+        const exists = current.some(p => p.id === this.place().id);
 
         const updated = exists
-            ? current.filter(p => p.id !== this.place.id)
-            : [...current, this.place];
+            ? current.filter(p => p.id !== this.place().id)
+            : [...current, this.place()];
 
         this.storage.saveWishlist(updated);
     }

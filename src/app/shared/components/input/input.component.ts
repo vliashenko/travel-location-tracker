@@ -1,4 +1,4 @@
-import { Component, model, Input, Output, EventEmitter } from '@angular/core';
+import { Component, model, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -13,11 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
     styleUrl: './input.component.scss'
 })
 export class InputComponent {
-    @Input() label = '';
-    @Input() placeholder = '';
-    @Input() icon?: string;
+    label = input.required<string>();
+    placeholder = input.required<string>();
+    icon = input<string>();
 
     value = model<string>('');
 
-    @Output() enterPressed = new EventEmitter<void>();
+    enterPressed = output<void>();
 }

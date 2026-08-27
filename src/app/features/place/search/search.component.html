@@ -1,8 +1,10 @@
 <div class="search-form">
-    <app-input label="Category / Place" [(value)]="query" icon="search" (enterPressed)="onSearch()">
+    <app-input placeholder="Search Category / Place" label="Category / Place" [(value)]="query" icon="search"
+        (enterPressed)="onSearch()">
     </app-input>
 
-    <app-input label="Location" [(value)]="location" icon="location_on" (enterPressed)="onSearch()">
+    <app-input placeholder="Search Location" label="Location" [(value)]="location" icon="location_on"
+        (enterPressed)="onSearch()">
     </app-input>
 
     <app-button variant="primary" [disabled]="isLoading" (btnClick)="onSearch()">
