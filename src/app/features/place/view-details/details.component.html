@@ -1,6 +1,7 @@
 @if (place) {
 <div class="details-panel">
-    <img class="hero-image" [src]="place.imageUrl || '/placeholder.jpg'" [alt]="place.name" loading="eager" />
+    <img class="hero-image" [src]="place.imageUrl || '/placeholder.jpg'" [alt]="place.name" loading="eager"
+        (error)="$event.target.src = '/placeholder.jpg'" />
 
     <div class="details-header">
         <h2>{{ place.name }}</h2>
@@ -8,7 +9,6 @@
         @if (place.price) {
         <p class="price"><strong>Ціна:</strong> {{ place.price }}</p>
         }
-
     </div>
 
     @if (place.address) {
@@ -17,7 +17,7 @@
     </p>
     }
 
-    @if(place.phone || place.website) {
+    @if (place.phone || place.website) {
     <div class="contact-info">
         @if (place.phone) {
         <p>
@@ -46,16 +46,18 @@
     </div>
     }
 
-    @if (place.reviewsList && place.reviewsList.length > 0) {
+    @if (place.reviewsList?.length) {
     <div class="reviews-section">
         <h3>Відгуки</h3>
-        <div class="review-item" *ngFor="let review of place.reviewsList">
+        @for (review of place.reviewsList; track $index) {
+        <div class="review-item">
             <div class="review-meta">
                 <strong>{{ review.author }}</strong>
                 <span class="review-rating">★ {{ review.rating }}</span>
             </div>
             <p class="review-text">{{ review.text }}</p>
         </div>
+        }
     </div>
     }
 
@@ -64,9 +66,7 @@
     </div>
 </div>
 } @else {
-<div>
-    <div class="empty-state">
-        <p>Оберіть місце для перегляду деталей</p>
-    </div>
+<div class="empty-state">
+    <p>Оберіть місце для перегляду деталей</p>
 </div>
 }

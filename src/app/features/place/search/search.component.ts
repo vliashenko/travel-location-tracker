@@ -5,17 +5,19 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { PlaceApiService } from '@services/place/place.service.api';
 import { PlaceCacheService } from '@services/place/place-cache.service.api';
 import { Place } from '@entities/business/place.type';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-search-places',
     standalone: true,
-    imports: [CommonModule, InputComponent, ButtonComponent],
+    imports: [CommonModule, InputComponent, ButtonComponent, MatSnackBarModule],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss'
 })
 export class SearchPlacesComponent implements OnInit {
     private api = inject(PlaceApiService);
     private cache = inject(PlaceCacheService);
+    private snackBar = inject(MatSnackBar);
 
     query = 'Tourist Attractions';
     location = 'Paris';
@@ -26,6 +28,7 @@ export class SearchPlacesComponent implements OnInit {
 
     ngOnInit(): void {
         this.onSearch();
+        console.log(this.placesFound)
     }
 
     onSearch(): void {
@@ -55,6 +58,12 @@ export class SearchPlacesComponent implements OnInit {
             error: (err) => {
                 this.isLoading = false;
                 this.loadingChanged.emit(false);
+                this.snackBar.open(err?.message || 'Не вдалося отримати інформацію про місця від серверу', 'Закрити', {
+                    duration: 5000,
+                    panelClass: ['error-snackbar'],
+                    horizontalPosition: 'end',
+                    verticalPosition: 'top'
+                })
             }
         });
     }

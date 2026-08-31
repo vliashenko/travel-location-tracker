@@ -6,13 +6,11 @@
 
     <main class="content-container">
         <div class="results-list">
-            @if (savedPlaces().length > 0) {
             @for (place of savedPlaces(); track place.id) {
             <app-card [place]="place" [state]="{ isSelected: false, isSaved: true }"
                 (toggleWishlist)="toggleWishlist($event)">
             </app-card>
-            }
-            } @else {
+            } @empty {
             <div class="empty-results">
                 <p>Ваш список обраного порожній.</p>
             </div>

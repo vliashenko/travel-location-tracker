@@ -3,7 +3,7 @@
 
     <div class="card-main-content">
         <div class="card-image-wrapper">
-            <img mat-card-image [src]="place().imageUrl" [alt]="place().name" loading="lazy"
+            <img mat-card-image [src]="place().imageUrl" [alt]="place().name" loading="eager"
                 (error)="$event.target.src = '/placeholder.jpg'" />
         </div>
 

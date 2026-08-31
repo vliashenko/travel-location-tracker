@@ -43,7 +43,7 @@ export class PlaceApiService {
             reviewsCount: item.reviews ?? 0,
             type: item.type || '',
             address: item.address || '',
-            imageUrl: item.thumbnail || item.photos_link || '/public/placeholder.jpg',
+            imageUrl: item.thumbnail || item.photos_link,
             price: item.price || '',
             phone: item.phone || '',
             website: item.website || '',
