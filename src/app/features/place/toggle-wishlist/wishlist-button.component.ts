@@ -1,7 +1,11 @@
 import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { PlaceStorageService } from '@services/place/place-storage.service.api';
+import { AuthService } from '@services/auth/auth.service.api';
+import { AuthDialogComponent } from '@features/auth/authorize/authorize.component';
 import { Place } from '@entities/business/place.type';
 
 @Component({
@@ -13,6 +17,8 @@ import { Place } from '@entities/business/place.type';
 })
 export class WishlistButtonComponent {
     private storage = inject(PlaceStorageService);
+    private authService = inject(AuthService);
+    private dialog = inject(MatDialog);
 
     place = input.required<Place>();
 
@@ -22,6 +28,14 @@ export class WishlistButtonComponent {
 
     toggle(event?: MouseEvent): void {
         event?.stopPropagation();
+
+        if (!this.authService.isAuthenticated()) {
+            this.dialog.open(AuthDialogComponent, {
+                data: 'login'
+            });
+            return;
+        }
+
         const current = this.storage.getWishlist();
         const exists = current.some(p => p.id === this.place().id);
 

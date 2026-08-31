@@ -9,31 +9,32 @@
         </app-search-places>
     </section>
 
-    @defer (when !isLoading) {
-        <main class="content-grid">
-            <div class="results-list">
-                @for (place of places; track place.id) {
-                    <app-card 
-                        [place]="place" 
-                        [state]="{ isSelected: selectedPlace?.id === place.id, isSaved: isSaved(place) }"
-                        (selectCard)="selectPlace($event)" 
-                        (toggleWishlist)="toggleWishlist($event)">
-                    </app-card>
-                } @empty {
-                    <div class="empty-results">
-                        <p>Не знайдено жодного місця. Спробуйте інший запит.</p>
-                    </div>
-                }
+    <!-- Додано () до isLoading() -->
+    @defer (when !isLoading()) {
+    <main class="content-grid">
+        <div class="results-list">
+            <!-- Додано () до places() та selectedPlace() -->
+            @for (place of places(); track place.id) {
+            <app-card [place]="place"
+                [state]="{ isSelected: selectedPlace()?.id === place.id, isSaved: isSaved(place) }"
+                (selectCard)="selectPlace($event)" (toggleWishlist)="toggleWishlist($event)">
+            </app-card>
+            } @empty {
+            <div class="empty-results">
+                <p>Не знайдено жодного місця. Спробуйте інший запит.</p>
             </div>
-
-            <aside class="details-sidebar">
-                <app-place-details [place]="selectedPlace"></app-place-details>
-            </aside>
-        </main>
-    } @loading {
-        <div class="loading-state">
-            <div class="spinner"></div>
-            <p>Завантаження даних...</p>
+            }
         </div>
+
+        <aside class="details-sidebar">
+            <!-- Додано () до selectedPlace() -->
+            <app-place-details [place]="selectedPlace()"></app-place-details>
+        </aside>
+    </main>
+    } @loading {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Завантаження даних...</p>
+    </div>
     }
 </div>

@@ -4,11 +4,41 @@
         <span>WISH</span>
     </div>
 
-    <button mat-button class="wishlist-btn" (click)="openWishlist.emit()">
-        <mat-icon color="warn" [matBadge]="wishlistCount()" [matBadgeHidden]="wishlistCount() === 0" matBadgeColor="warn"
-            aria-hidden="false">
-            favorite
-        </mat-icon>
-        <span>Мій Wishlist</span>
-    </button>
+    <div class="actions-container">
+        <button mat-button class="wishlist-btn" (click)="openWishlist.emit()">
+            <mat-icon color="warn" [matBadge]="wishlistCount()" [matBadgeHidden]="wishlistCount() === 0"
+                matBadgeColor="warn" aria-hidden="false">
+                favorite
+            </mat-icon>
+            <span>Мій Wishlist</span>
+        </button>
+
+        <div class="divider"></div>
+
+        @if (user()) {
+        <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="avatar-btn" aria-label="Профіль користувача">
+            @if (user()?.photoURL) {
+            <img [src]="user()?.photoURL" [alt]="user()?.displayName || 'User avatar'" class="avatar-img" referrerpolicy="no-referrer" />
+            } @else {
+            <mat-icon>account_circle</mat-icon>
+            }
+        </button>
+
+        <mat-menu #profileMenu="matMenu" xPosition="before">
+            <div class="menu-header">
+                <span class="user-name">{{ user()?.displayName || 'Користувач' }}</span>
+                <span class="user-email">{{ user()?.email }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="logoutClick.emit()">
+                <mat-icon color="warn">logout</mat-icon>
+                <span>Вийти</span>
+            </button>
+        </mat-menu>
+        } @else {
+        <app-button variant="secondary" icon="login" (btnClick)="loginClick.emit()">
+            Увійти
+        </app-button>
+        }
+    </div>
 </header>

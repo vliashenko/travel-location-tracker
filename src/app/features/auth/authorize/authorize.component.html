@@ -1,0 +1,52 @@
+<div class="auth-dialog">
+  @if (isLoading()) {
+    <div class="loading-wrapper">
+      <app-spinner [show]="true"></app-spinner>
+    </div>
+  } @else {
+    <h2 mat-dialog-title>
+      {{ mode() === 'login' ? 'Вхід у систему' : 'Реєстрація' }}
+    </h2>
+  
+    <mat-dialog-content>
+      <div class="form-container">
+        <app-input 
+          label="Email" 
+          placeholder="example@mail.com" 
+          icon="email"
+          [(value)]="email"
+        ></app-input>
+  
+        <app-input 
+          label="Пароль" 
+          [placeholder]="mode() === 'login' ? '******' : 'Мінімум 6 символів'" 
+          icon="lock"
+          [(value)]="password"
+          (enterPressed)="onSubmit()"
+        ></app-input>
+  
+        <app-button (btnClick)="onSubmit()">
+          {{ mode() === 'login' ? 'Увійти' : 'Зареєструватися' }}
+        </app-button>
+      </div>
+  
+      <div class="divider">
+        <span>або</span>
+      </div>
+  
+      <app-button variant="secondary" icon="login" (btnClick)="onGoogleLogin()">
+        {{ mode() === 'login' ? 'Увійти через Google' : 'Зареєструватися через Google' }}
+      </app-button>
+  
+      <div class="switch-mode">
+        @if (mode() === 'login') {
+          Немає акаунту? 
+          <button type="button" class="link-btn" (click)="toggleMode()">Зареєструватися</button>
+        } @else {
+          Вже є акаунт? 
+          <button type="button" class="link-btn" (click)="toggleMode()">Увійти</button>
+        }
+      </div>
+    </mat-dialog-content>
+  }
+</div>

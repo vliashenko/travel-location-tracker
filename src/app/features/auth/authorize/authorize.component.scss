@@ -1,0 +1,86 @@
+.auth-dialog {
+  position: relative;
+  padding: 4rem;
+  min-width: 480px;
+  box-sizing: border-box;
+
+  h2[mat-dialog-title] {
+    margin: 0 0 16px 0;
+    padding-bottom: 1rem;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    app-button {
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
+
+  .divider {
+    text-align: center;
+    margin: 20px 0 16px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #e0e0e0;
+      z-index: 1;
+    }
+
+    span {
+      background-color: #ffffff;
+      padding: 0 12px;
+      position: relative;
+      z-index: 2;
+      color: #757575;
+      font-size: 13px;
+      text-transform: lowercase;
+    }
+  }
+
+  app-button[variant="secondary"] {
+    width: 100%;
+  }
+
+  .switch-mode {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #616161;
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: #3f51b5;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0 4px;
+      margin-left: 4px;
+      text-decoration: underline;
+
+      &:hover {
+        color: #303f9f;
+      }
+    }
+  }
+}

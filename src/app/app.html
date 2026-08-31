@@ -1,7 +1,12 @@
-<main>
-  <app-header [wishlistCount]="getWishlistCount()" (openWishlist)="navigateToWishlist()"
-    (logoClick)="navigateToTracker()">
-  </app-header>
+<app-header 
+  [user]="user()" 
+  [wishlistCount]="wishlistCount()" 
+  (logoClick)="navigateToTracker()" 
+  (openWishlist)="navigateToWishlist()"
+  (loginClick)="onLogin()"
+  (logoutClick)="onLogout()">
+</app-header>
 
+<main class="main-content">
   <router-outlet></router-outlet>
 </main>

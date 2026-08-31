@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './app/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -12,7 +13,8 @@ export const routes: Routes = [
     },
     {
         path: 'wishlist',
-        loadComponent: () => import('./pages/wishlist/wishlist-page.component').then(m => m.WishlistPageComponent)
+        loadComponent: () => import('./pages/wishlist/wishlist-page.component').then(m => m.WishlistPageComponent),
+        canActivate: [authGuard],
     },
     {
         path: '**',
