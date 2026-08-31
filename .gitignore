@@ -2,7 +2,7 @@
 
 # Environments & Secret Keys
 src/environments/*.ts
-!src/environments/environment.ts
+src/environments/**/*.ts
 *.env
 *.env.*
 
