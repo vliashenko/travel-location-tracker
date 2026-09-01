@@ -8,6 +8,7 @@ import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    updateProfile,
     User
 } from 'firebase/auth';
 import { environment } from '@environments/environment';
@@ -56,6 +57,19 @@ export class AuthService {
             return result.user;
         } catch (error) {
             console.error('Помилка Google auth:', error);
+            throw error;
+        }
+    }
+
+    async updateUserProfile(data: { displayName?: string; photoURL?: string }): Promise<void> {
+        const user = this.auth.currentUser;
+        if (!user) throw new Error('Користувач не авторизований');
+
+        try {
+            await updateProfile(user, data);
+            this.currentUser.set({ ...user });
+        } catch (error) {
+            console.error('Помилка оновлення профілю:', error);
             throw error;
         }
     }

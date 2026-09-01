@@ -1,0 +1,47 @@
+<div class="profile-panel">
+    <div class="avatar-preview">
+        @if (profileForm.controls.photoURL.value) {
+        <img [src]="profileForm.controls.photoURL.value" alt="Avatar preview" referrerpolicy="no-referrer" />
+        } @else {
+        <mat-icon>account_circle</mat-icon>
+        }
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+        <div class="container">
+            <app-input label="Email" placeholder="Email користувача" icon="email" formControlName="email">
+            </app-input>
+
+            <app-input label="Ім'я користувача" placeholder="Введіть ім'я" icon="person" formControlName="displayName"
+                (enterPressed)="onSubmit()">
+            </app-input>
+            @if (profileForm.controls.displayName.hasError('required') && profileForm.controls.displayName.touched) {
+            <span class="error-text">Ім'я обов'язкове</span>
+            }
+            @if (profileForm.controls.displayName.hasError('minlength') && profileForm.controls.displayName.touched) {
+            <span class="error-text">Мінімум 2 символи</span>
+            }
+
+            <app-input label="URL аватара" placeholder="https://example.com/photo.jpg" icon="link"
+                formControlName="photoURL" (enterPressed)="onSubmit()">
+            </app-input>
+            @if (profileForm.controls.photoURL.hasError('pattern') && profileForm.controls.photoURL.touched) {
+            <span class="error-text">Некоректний URL (має починатися з http:// або https://)</span>
+            }
+        </div>
+
+        @if (successMessage()) {
+        <div class="alert alert-success">Профіль успішно оновлено!</div>
+        }
+
+        @if (errorMessage()) {
+        <div class="alert alert-danger">{{ errorMessage() }}</div>
+        }
+
+        <div class="form-actions">
+            <app-button type="submit" variant="primary" [disabled]="isLoading() || profileForm.invalid">
+                Зберегти зміни
+            </app-button>
+        </div>
+    </form>
+</div>

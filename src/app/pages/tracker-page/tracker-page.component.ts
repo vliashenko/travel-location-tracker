@@ -30,7 +30,7 @@ export class TrackerPageComponent {
   places = signal<Place[]>([]);
   selectedPlace = signal<Place | null>(null);
   isLoading = signal<boolean>(false);
-  
+
   wishlist = signal<Place[]>(this.storageService.getWishlist());
 
   onPlacesFound(results: Place[]): void {
@@ -47,6 +47,10 @@ export class TrackerPageComponent {
   }
 
   isSaved(place: Place): boolean {
+    if (!this.authService.isAuthenticated()) {
+      return false;
+    }
+
     return this.wishlist().some(p => p.id === place.id);
   }
 

@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { ButtonComponent } from '@shared/components/button/button.component';
+import { RouterLink } from '@angular/router';
 
 export interface UserProfile {
   displayName?: string | null;
@@ -23,7 +24,8 @@ export interface UserProfile {
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,
-    ButtonComponent
+    ButtonComponent,
+    RouterLink,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -36,4 +38,5 @@ export class HeaderComponent {
   logoClick = output<void>();
   loginClick = output<void>();
   logoutClick = output<void>();
+  profileClick = output<void>();
 }

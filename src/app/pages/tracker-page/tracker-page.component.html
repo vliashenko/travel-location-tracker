@@ -9,11 +9,9 @@
         </app-search-places>
     </section>
 
-    <!-- Додано () до isLoading() -->
     @defer (when !isLoading()) {
     <main class="content-grid">
         <div class="results-list">
-            <!-- Додано () до places() та selectedPlace() -->
             @for (place of places(); track place.id) {
             <app-card [place]="place"
                 [state]="{ isSelected: selectedPlace()?.id === place.id, isSaved: isSaved(place) }"
@@ -27,7 +25,6 @@
         </div>
 
         <aside class="details-sidebar">
-            <!-- Додано () до selectedPlace() -->
             <app-place-details [place]="selectedPlace()"></app-place-details>
         </aside>
     </main>

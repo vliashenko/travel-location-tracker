@@ -23,6 +23,10 @@ export class WishlistButtonComponent {
     place = input.required<Place>();
 
     isSaved(): boolean {
+        if (!this.authService.isAuthenticated()) {
+            return false;
+        }
+
         return this.storage.getWishlist().some(p => p.id === this.place().id);
     }
 
