@@ -1,27 +1,11 @@
 # 🌍 Travel Location Tracker & Wishlist
 
-A modern, responsive web application built with **Angular** that allows users to search for places, view detailed location information (powered by SerpApi and Google Maps data), and manage a personalized wishlist of spots to visit.
+<img width="1916" height="908" alt="image" src="https://github.com/user-attachments/assets/e89da28c-6aad-4373-8bc5-b1bc35895eab" />
 
----
+<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/f592a891-34d5-4fe5-ab70-cea9ac7fccea" />
 
-## ✨ Features
+<img width="1918" height="911" alt="image" src="https://github.com/user-attachments/assets/72c6e7f8-5076-489c-8d56-e8985271a4bf" />
 
-* **Smart Location Search:** Search for places, tourist attractions, and businesses globally using SerpApi (`google_maps` engine integration).
-* **Rich Place Details:** View comprehensive information for any selected location, including:
-  * High-resolution hero images and ratings.
-  * Address, price level, phone number, and direct website links.
-  * Venue descriptions/snippets.
-  * Curated user review snippets with ratings and author attributions.
-* **Wishlist Management:** Save or remove favorite locations instantly with a clean single-column wishlist page view.
-* **Responsive & Modern UI:** Designed with a clean, application-like layout featuring smooth scrolling panels and a polished aesthetic.
+<img width="1919" height="911" alt="image" src="https://github.com/user-attachments/assets/fb8a13e3-0ded-45b4-b6d8-c81f9c2e156e" />
 
----
-
-## 🛠️ Tech Stack
-
-* **Framework:** Angular (Standalone Components, Signals, Reactive Architecture)
-* **Styling:** SCSS (Modern CSS Grid, Flexbox, custom scrollbars)
-* **Data Source / API:** SerpApi (Google Maps Search API) via Angular `HttpClient` and RxJS.
-* **State & Storage:** Angular Signals & Local Storage service integration.
-
----
+<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/3e838c75-1730-4b1a-9c2a-da2eca0352b6" />
