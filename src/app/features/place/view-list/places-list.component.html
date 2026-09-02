@@ -1,0 +1,11 @@
+<div class="results-list">
+    @for (place of places(); track place.id) {
+    <app-card [place]="place" [state]="{ isSelected: selectedPlace()?.id === place.id, isSaved: isSaved(place) }"
+        (selectCard)="selectPlace.emit($event)" (toggleWishlist)="toggleWishlist($event)">
+    </app-card>
+    } @empty {
+    <div class="empty-results">
+        <p>Не знайдено жодного місця. Спробуйте інший запит.</p>
+    </div>
+    }
+</div>
