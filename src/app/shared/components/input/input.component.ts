@@ -1,6 +1,6 @@
 import { Component, input, output, forwardRef, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-input',
     standalone: true,
-    imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule, MatIconModule],
+    imports: [CommonModule, MatInputModule, MatFormFieldModule, MatIconModule],
     templateUrl: './input.component.html',
     styleUrl: './input.component.scss',
     providers: [
@@ -24,7 +24,6 @@ export class InputComponent implements ControlValueAccessor {
     placeholder = input.required<string>();
     icon = input<string>();
 
-    // Повертаємо model() для підтримки [(value)]
     value = model<string>('');
     disabled = model<boolean>(false);
 
@@ -49,9 +48,13 @@ export class InputComponent implements ControlValueAccessor {
         this.disabled.set(isDisabled);
     }
 
-    onInput(val: string): void {
+    onInput(event: Event): void {
+        const val = (event.target as HTMLInputElement).value;
         this.value.set(val);
         this.onChange(val);
+    }
+
+    onBlur(): void {
         this.onTouched();
     }
 }

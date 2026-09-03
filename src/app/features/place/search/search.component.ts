@@ -28,7 +28,6 @@ export class SearchPlacesComponent implements OnInit {
 
     ngOnInit(): void {
         this.onSearch();
-        console.log(this.placesFound)
     }
 
     onSearch(): void {
