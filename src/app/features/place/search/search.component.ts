@@ -1,23 +1,21 @@
 import { Component, inject, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { InputComponent } from '@shared/components/input/input.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
-import { PlaceApiService } from '@services/place/place.service.api';
-import { PlaceCacheService } from '@services/place/place-cache.service.api';
 import { Place } from '@entities/business/place.type';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { SearchService } from './search.service';
 
 @Component({
     selector: 'app-search-places',
     standalone: true,
-    imports: [CommonModule, InputComponent, ButtonComponent, MatSnackBarModule],
+    imports: [CommonModule, InputComponent, ButtonComponent],
+    providers: [SearchService],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss'
 })
 export class SearchPlacesComponent implements OnInit {
-    private api = inject(PlaceApiService);
-    private cache = inject(PlaceCacheService);
-    private snackBar = inject(MatSnackBar);
+    private searchService = inject(SearchService);
 
     query = 'Tourist Attractions';
     location = 'Paris';
@@ -31,39 +29,21 @@ export class SearchPlacesComponent implements OnInit {
     }
 
     onSearch(): void {
-        const searchQuery = this.query || 'Tourist Attractions';
-        const searchLocation = this.location || 'Paris';
+        this.setLoading(true);
 
-        this.isLoading = true;
-        this.loadingChanged.emit(true);
-
-        const cached = this.cache.get(searchQuery, searchLocation);
-        if (cached && cached.length > 0) {
-            this.placesFound.emit(cached);
-            this.isLoading = false;
-            this.loadingChanged.emit(false);
-            return;
-        }
-
-        this.api.fetchPlaces(searchQuery, searchLocation).subscribe({
+        this.searchService.getPlaces(this.query, this.location).subscribe({
             next: (places) => {
-                if (places && places.length > 0) {
-                    this.cache.set(searchQuery, searchLocation, places);
-                }
                 this.placesFound.emit(places);
-                this.isLoading = false;
-                this.loadingChanged.emit(false);
+                this.setLoading(false);
             },
-            error: (err) => {
-                this.isLoading = false;
-                this.loadingChanged.emit(false);
-                this.snackBar.open(err?.message || 'Не вдалося отримати інформацію про місця від серверу', 'Закрити', {
-                    duration: 5000,
-                    panelClass: ['error-snackbar'],
-                    horizontalPosition: 'end',
-                    verticalPosition: 'top'
-                })
+            error: () => {
+                this.setLoading(false);
             }
         });
+    }
+
+    private setLoading(state: boolean): void {
+        this.isLoading = state;
+        this.loadingChanged.emit(state);
     }
 }
