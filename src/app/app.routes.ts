@@ -22,6 +22,11 @@ export const routes: Routes = [
         canActivate: [authGuard],
     },
     {
+        path: 'map',
+        loadComponent: () => import('./pages/map/map-page.component').then(m => m.MapPageComponent),
+        canActivate: [authGuard],
+    },
+    {
         path: '**',
         redirectTo: 'tracker'
     }

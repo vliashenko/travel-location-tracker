@@ -5,14 +5,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { RouterLink } from '@angular/router';
-
-export interface UserProfile {
-  displayName?: string | null;
-  email?: string | null;
-  photoURL?: string | null;
-}
+import { UserProfile } from '@entities/ui/profile.type';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +20,7 @@ export interface UserProfile {
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,
+    MatTooltipModule,
     ButtonComponent,
     RouterLink,
   ],

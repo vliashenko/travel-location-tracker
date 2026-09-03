@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-container-element {
+  width: 100%;
+  height: 100%;
+}
+
+:deep(.custom-map-pin) {
+  background: transparent !important;
+  border: none !important;
+}

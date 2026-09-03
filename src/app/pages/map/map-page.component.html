@@ -1,0 +1,34 @@
+<div class="map-page-container">
+    <aside class="sidebar">
+        <div class="search-box">
+            <app-search-places (search)="onSearch($event)" />
+        </div>
+
+        <div class="results-container">
+            @if (isLoading()) {
+            <div class="state-msg">Завантаження закладів...</div>
+            } @else if (places().length === 0) {
+            <div class="state-msg">Введіть запит для пошуку місць на мапі</div>
+            } @else {
+            <div class="places-list">
+                @for (place of places(); track place.id) {
+                <div class="place-card">
+                    <div class="card-content">
+                        <h4>{{ place.name }}</h4>
+                        <p class="address">{{ place.address }}</p>
+                        @if (place.rating) {
+                        <span class="rating">⭐ {{ place.rating }}</span>
+                        }
+                    </div>
+                    <app-wishlist-button [place]="place" />
+                </div>
+                }
+            </div>
+            }
+        </div>
+    </aside>
+
+    <main class="map-content">
+        <app-places-map [places]="places()" />
+    </main>
+</div>

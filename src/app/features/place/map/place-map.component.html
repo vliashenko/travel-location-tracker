@@ -1,0 +1,33 @@
+<div class="map-wrapper">
+    <div #mapContainer class="leaflet-container-element"></div>
+
+    @if (selectedPlace(); as place) {
+    <div class="selected-place-card">
+        <button class="close-btn" (click)="closeCard()">✕</button>
+
+        @if (place.imageUrl) {
+        <img [src]="place.imageUrl" [alt]="place.name" class="place-img" />
+        }
+
+        <div class="place-info">
+            <div class="header-row">
+                <h3>{{ place.name }}</h3>
+                <app-wishlist-button [place]="place" />
+            </div>
+
+            @if (place.type) {
+            <p class="type">{{ place.type }}</p>
+            }
+            @if (place.address) {
+            <p class="address">{{ place.address }}</p>
+            }
+
+            @if (place.rating) {
+            <div class="rating">
+                ⭐ {{ place.rating }} ({{ place.reviewsCount || 0 }} відгуків)
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>

@@ -16,6 +16,43 @@
     cursor: pointer;
   }
 
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+
+    .disabled-wrapper {
+      display: inline-block;
+      cursor: not-allowed;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: #334155;
+      border-radius: 8px;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover:not([disabled]) {
+        background-color: #f1f5f9;
+        color: #0f766e;
+      }
+
+      &.active-link {
+        color: #0f766e;
+        background-color: #ccfbf1;
+      }
+
+      &[disabled] {
+        color: #94a3b8;
+        pointer-events: none;
+      }
+    }
+  }
+
   .actions-container {
     display: flex;
     align-items: center;

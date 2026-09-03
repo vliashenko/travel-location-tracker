@@ -3,6 +3,8 @@
   gap: 1rem;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
 
   app-input {
     flex: 1;

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, catchError, of } from 'rxjs';
 import { environment } from '@environments/environment';
-import { Place, SerpApiRawResult, SerpApiResponse, ReviewSnippet } from '@entities/business/place.type';
+import { Place, SerpApiRawResult, SerpApiResponse, ReviewSnippet, GpsCoordinates } from '@entities/business/place.type';
 
 @Injectable({
     providedIn: 'root'
@@ -43,13 +43,25 @@ export class PlaceApiService {
             reviewsCount: item.reviews ?? 0,
             type: item.type || '',
             address: item.address || '',
-            imageUrl: item.thumbnail || item.photos_link,
+            imageUrl: item.photos_link || item.thumbnail,
             price: item.price || '',
             phone: item.phone || '',
             website: item.website || '',
             description: item.description || item.snippet || '',
-            reviewsList: this.mapReviews(item)
+            reviewsList: this.mapReviews(item),
+            coordinates: this.extractCoordinates(item)
         }));
+    }
+
+    private extractCoordinates(raw: SerpApiRawResult): GpsCoordinates | undefined {
+        const lat = raw.gps_coordinates?.latitude ?? raw.latitude;
+        const lng = raw.gps_coordinates?.longitude ?? raw.longitude;
+
+        if (typeof lat === 'number' && typeof lng === 'number') {
+            return { latitude: lat, longitude: lng };
+        }
+
+        return undefined;
     }
 
     private mapReviews(raw: any): ReviewSnippet[] | undefined {

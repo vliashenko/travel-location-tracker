@@ -1,3 +1,8 @@
+export interface GpsCoordinates {
+    latitude: number;
+    longitude: number;
+}
+
 export interface SerpApiRawResult {
     data_id?: string;
     place_id?: string;
@@ -14,6 +19,12 @@ export interface SerpApiRawResult {
     description?: string;
     snippet?: string;
     photos_link?: string;
+    gps_coordinates?: {
+        latitude: number;
+        longitude: number;
+    };
+    latitude?: number;
+    longitude?: number;
 }
 
 export interface SerpApiResponse {
@@ -42,6 +53,7 @@ export interface Place {
     isOpenNow?: boolean;
     description?: string;
     reviewsList?: ReviewSnippet[];
+    coordinates?: GpsCoordinates;
 }
 
 export interface CacheEntry<T> {
